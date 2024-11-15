@@ -1,0 +1,20 @@
+Primera terminal:
+cd ws_test_microros
+source ~/ws_test_microros/install/local_setup.bash
+ros2 run micro_ros_setup create_agent_ws.sh
+ros2 run micro_ros_setup build_agent.sh
+source ~/ws_test_microros/install/local_setup.bash
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
+(Luego resetear el ESP32 -> apretar 1 vez el boton EN)
+
+
+Segunda terminal:
+cd ws_test_microros
+ros2 topic pub /target_velocity std_msgs/msg/Float32 "data: 300.0"
+
+
+Tercera terminal:
+cd ws_test_microros
+source /opt/ros/humble/setup.bash
+ros2 topic list
+ros2 topic echo /encoder_velocity
