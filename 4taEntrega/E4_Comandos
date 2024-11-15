@@ -1,0 +1,30 @@
+Primera terminal:
+
+👁️ 
+ip addr show (Ver que la IP que coincida con el codigo .ino)
+👁️ 
+
+cd ws_test_microros
+source ~/ws_test_microros/install/local_setup.bash
+ros2 run micro_ros_setup create_agent_ws.sh
+ros2 run micro_ros_setup build_agent.sh
+source ~/ws_test_microros/install/local_setup.bash
+
+sudo ufw allow 8888 (solo 1 vez por espacio de trabajo)
+ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888 --interface 0.0.0.0
+
+
+Segunda Terminal: (para ambos motores ya es)
+source /opt/ros/humble/setup.bash
+ros2 topic pub /target_velocity std_msgs/msg/Float32 "data: 300.0"
+
+
+Otras terminales:
+source /opt/ros/humble/setup.bash
+ros2 topic echo /encoder_velocity_left
+ros2 topic echo /encoder_velocity_right
+ros2 topic echo /ultrasonic_front
+ros2 topic echo /ultrasonic_left
+ros2 topic echo /ultrasonic_right
+
+ros2 topic pub /ultrasonic_interval std_msgs/msg/Int32 "data: 2000"
